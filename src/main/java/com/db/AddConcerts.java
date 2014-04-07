@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name="AddConcerts")
 public class AddConcerts {
 
 	private long id;

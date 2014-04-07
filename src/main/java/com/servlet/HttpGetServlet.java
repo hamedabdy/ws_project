@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.persistence.exceptions.DatabaseException;
 import org.json.JSONObject;
 
 import com.db.AddConcerts;
@@ -30,9 +31,9 @@ public class HttpGetServlet extends HttpServlet {
 
 		PrintWriter out = res.getWriter();
 		res.setContentType("text/html");
-		
+
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("manager1");
-    	EntityManager em = emf.createEntityManager();
+		EntityManager em = emf.createEntityManager();
 
 		String s = "http://ws.audioscrobbler.com/2.0/?method=geo.getevents&location=paris&limit=10"
 				+ "&api_key=dbc287366d92998e7f5fb5ba6fb7e7f1&format=json";
@@ -59,44 +60,20 @@ public class HttpGetServlet extends HttpServlet {
 			artists = jo2.getJSONObject("artists").get("artist").toString();
 			System.out.println("id: " + id + " title: " + title + " artist: " + artists);
 			out.println("id: " + id + " title: " + title + "<br>");
-			
+
 			// Adding to DB
 			AddConcerts addToDb = new AddConcerts();
-	    	em.getTransaction().begin();
+			em.getTransaction().begin();
 			addToDb.setId(Long.parseLong(id));
 			addToDb.setTitle(title);
 			addToDb.setArtists(artists);
 			em.persist(addToDb);
 			em.getTransaction().commit();
 		}
-		//System.out.println("----------------");
-		//System.out.println("taille: " + taille);
-
-		//out.println("heelooooo");
-		
-		//addToDb.setId(12L);
-		//addToDb.setTitle("new title");
-		//addToDb.setArtists("new artist");
-		
-		
-		
+		out.println("<br><a href='/projet' >back</a>");
 		em.close();
 		out.close();
-		
-		
-		/*
-		 * EntityManagerFactory emf = Persistence.createEntityManagerFactory("manager1");
-    	EntityManager em = emf.createEntityManager();
-    	
-    	Personne p = new Personne();
-    	em.getTransaction().begin();
-    	p.setName("hamed");
-    	em.persist(p);
-    	em.getTransaction().commit();
-    	em.close();
-		 * 
-		 */
-		
+
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {}

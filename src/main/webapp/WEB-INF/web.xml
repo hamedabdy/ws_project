@@ -14,4 +14,22 @@
 		<url-pattern>/get</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>ShowConcertsServlet</servlet-name>
+		<servlet-class>com.servlet.ShowConcertsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowConcertsServlet</servlet-name>
+		<url-pattern>/show</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EmptyDBServlet</servlet-name>
+		<servlet-class>com.servlet.EmptyDBServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmptyDBServlet</servlet-name>
+		<url-pattern>/del</url-pattern>
+	</servlet-mapping>
+
 </web-app>
