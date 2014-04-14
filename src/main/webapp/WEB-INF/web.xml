@@ -27,9 +27,22 @@
 		<servlet-name>EmptyDBServlet</servlet-name>
 		<servlet-class>com.servlet.EmptyDBServlet</servlet-class>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>EmptyDBServlet</servlet-name>
 		<url-pattern>/del</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RiakServlet</servlet-name>
+		<display-name>RiakServlet</display-name>
+		<description></description>
+		<servlet-class>com.servlet.RiakServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>RiakServlet</servlet-name>
+		<url-pattern>/riak</url-pattern>
 	</servlet-mapping>
 
 </web-app>
