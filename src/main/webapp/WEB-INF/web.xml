@@ -42,15 +42,31 @@
 
 	<servlet-mapping>
 		<servlet-name>RiakServlet</servlet-name>
-		<url-pattern>/upload</url-pattern>
+		<url-pattern>/riak</url-pattern>
 	</servlet-mapping>
-
-
-	<multipart-config>
-		<location>/Users/hamed/Desktop/uploads/</location>
-		<max-file-size>20848820</max-file-size>
-		<max-request-size>418018841</max-request-size>
-		<file-size-threshold>1048576</file-size-threshold>
-	</multipart-config>
+	
+	<servlet>
+		<servlet-name>GetVideoFromDb</servlet-name>
+		<display-name>GetVideoFromDb</display-name>
+		<description></description>
+		<servlet-class>com.servlet.GetVideoFromDb</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetVideoFromDb</servlet-name>
+		<url-pattern>/getVideo</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UploadVideoToDb</servlet-name>
+		<display-name>UploadVideoToDb</display-name>
+		<description></description>
+		<servlet-class>com.servlet.UploadVideoToDb</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UploadVideoToDb</servlet-name>
+		<url-pattern>/uploadVideo</url-pattern>
+	</servlet-mapping>
 
 </web-app>
