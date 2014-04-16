@@ -1,9 +1,12 @@
 package com.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +19,12 @@ import com.basho.riak.client.RiakException;
 import com.basho.riak.client.RiakFactory;
 import com.basho.riak.client.bucket.Bucket;
 import com.db.AddConcerts;
+import com.db.Video;
 
 /**
  * Servlet implementation class RiakServlet
  */
+@MultipartConfig
 public class RiakServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +33,6 @@ public class RiakServlet extends HttpServlet {
 	 */
 	public RiakServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,8 +40,15 @@ public class RiakServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
+		
+		File myFile = new File("/Users/hamed/Desktop/ossc/videoplayer/small.webm");
+		System.out.println("file exists? " + myFile.exists());
+		System.out.println("file:  " + myFile.getAbsolutePath() + " \n " + myFile.getCanonicalPath() + " \n " 
+		+ myFile.getName() + " \n " + myFile.getPath() + " \n " + myFile.toURI()
+		+ "\n" );
+		
+		
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		
@@ -46,10 +57,18 @@ public class RiakServlet extends HttpServlet {
 		IRiakObject myObject;
 		//JSONObject jo;
 		String value, key;
+		
 		AddConcerts concert = new AddConcerts();
 		concert.setId(10);
 		concert.setTitle("someTitle");
 		concert.setArtists("someArtists");
+		
+		Video v = new Video();
+		v.setFilePath("/Users/hamed/Desktop/ossc/videoplayer/small.webm");
+		v.setFileName("small.webm");
+		v.setDescription("small webm video");
+		v.setUploadDate(new Date());
+		
 		try {
 			
 			// initialize riak 
@@ -58,26 +77,33 @@ public class RiakServlet extends HttpServlet {
 			Bucket myBucket = riakClient.fetchBucket("TestBucket").execute();
 			//store data on bucket under key name "TestKey"
 			myBucket.store("TestKey", myData).execute();
-			
-			//fetch data frome riak
+			//fetch data from riak  -->
 			myObject = myBucket.fetch("TestKey").execute();
 			key = (new JSONObject(myObject).getString("key")).toString();
 			value = (new JSONObject(myObject).getString("valueAsString")).toString();
 			System.out.println("myobject : { key: " + key + ", value: " + value + " }");
 			out.println("myobject : { key: " + key + ", value: " + value + " }" + "<br><br>");
-			
+			// <--
+			// store a concert into riak -->
 			myBucket.store("concerts", concert).execute();
 			myObject = myBucket.fetch("concerts").execute();
 			key = (new JSONObject(myObject).getString("key")).toString();
 			value = (new JSONObject(myObject).getString("valueAsString")).toString();
 			System.out.println("myobject : { key: " + key + ", value: " + value + " }");
 			out.println("myobject : { key: " + key + ", value: " + value + " }" + "<br><br>");
-			
+			// <--
+			// Store a video into riak -->
+			myBucket.store("videos", v).execute();
+			myObject = myBucket.fetch("videos").execute();
+			key = (new JSONObject(myObject).getString("key")).toString();
+			value = (new JSONObject(myObject).getString("valueAsString")).toString();
+			System.out.println("myobject : { key: " + key + ", value: " + value + " }");
+			out.println("myobject : { key: " + key + ", value: " + value + " }" + "<br><br>");
+			// <--
 			
 			// Close riak connection
 			riakClient.shutdown();
 		} catch (RiakException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
