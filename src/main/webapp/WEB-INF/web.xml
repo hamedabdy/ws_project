@@ -27,22 +27,30 @@
 		<servlet-name>EmptyDBServlet</servlet-name>
 		<servlet-class>com.servlet.EmptyDBServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>EmptyDBServlet</servlet-name>
 		<url-pattern>/del</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>RiakServlet</servlet-name>
 		<display-name>RiakServlet</display-name>
 		<description></description>
 		<servlet-class>com.servlet.RiakServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>RiakServlet</servlet-name>
-		<url-pattern>/riak</url-pattern>
+		<url-pattern>/upload</url-pattern>
 	</servlet-mapping>
+
+
+	<multipart-config>
+		<location>/Users/hamed/Desktop/uploads/</location>
+		<max-file-size>20848820</max-file-size>
+		<max-request-size>418018841</max-request-size>
+		<file-size-threshold>1048576</file-size-threshold>
+	</multipart-config>
 
 </web-app>
