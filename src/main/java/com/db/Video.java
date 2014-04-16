@@ -1,31 +1,31 @@
 package com.db;
 
 import java.util.Date;
+import java.util.Random;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
-@Entity
 public class Video {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@Id
 	private String filePath;
 	private String fileName;
 	private String fileFormat;
 	private String description;
 	private Date uploadDate;
 	
-	
 	public Video() {
-		// TODO Auto-generated constructor stub
+		generateId();
 	}
 
+	@Override
+	public String toString() {
+		return String.valueOf(id);
+	}
+	
+	public void generateId() {
+		int x = (new Random()).nextInt();
+		setId(x);
+	}
+	
 
 	public int getId() {
 		return id;
