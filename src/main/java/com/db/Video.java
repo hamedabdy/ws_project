@@ -14,6 +14,7 @@ public class Video {
 	
 	public Video() {
 		generateId();
+		uploadDate = new Date();
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class Video {
 		int x = (new Random()).nextInt();
 		setId(x);
 	}
-	
+
 
 	public int getId() {
 		return id;
