@@ -59,22 +59,24 @@ public class UploadVideoToDb extends HttpServlet {
 		 * GET form parameters
 		 */
 		String videoTitle = request.getParameter("video-title");
-		System.out.println("videoTitle:  " + videoTitle);
+		//System.out.println("videoTitle:  " + videoTitle);
 		Part filePart = request.getPart("video");
 		String fileName = getFilename(filePart);
-		System.out.println("file name  : "  + fileName);
+		//System.out.println("file name  : "  + fileName);
 		InputStream fileContent = filePart.getInputStream();
+		// Creating a new Video instance to get a new VideoId
+		Video newVideo = new Video();
 		// Write uploaded file to disk
-		String pathToFile = writeToDisk(fileContent, fileName, "", "/Users/hamed/Desktop/ossc/uploads/");
+		String pathToFile = writeToDisk(fileContent, newVideo.getId(), fileName
+				, newVideo.getUploadDate(), "", "/src/main/webapp/uploads/");
 		// Create new video instance with uploaded parameters
-		Video newVideo = writeToVideo(videoTitle, pathToFile, fileName, "", "", new Date());
+		newVideo = writeToVideo(videoTitle, pathToFile, newVideo.getId()+"_"+fileName, "", "");
 		
 		/*
 		 *  Riak section
 		 */
 		IRiakClient riakClient;
 		IRiakObject myObject;
-		//JSONObject jo;
 		String value, key;
 
 		try {
@@ -85,7 +87,7 @@ public class UploadVideoToDb extends HttpServlet {
 			myObject = videoBucket.fetch(String.valueOf(newVideo.getId())).execute();
 			key = (new JSONObject(myObject).getString("key")).toString();
 			value = (new JSONObject(myObject).getString("valueAsString")).toString();
-			System.out.println("myobject : { key: " + key + "\n value: " + value + " }");
+			//System.out.println("myobject : { key: " + key + "\n value: " + value + " }");
 			out.println("myobject : { key: " + key + ", value: " + value + " }" + "<br><br>");
 			// <--
 
@@ -112,11 +114,12 @@ public class UploadVideoToDb extends HttpServlet {
 	
 	
 
-	private String writeToDisk(InputStream inputStream, String filename, String VideoTitle, String filePath) 
+	private String writeToDisk(InputStream inputStream, int id, String filename, Date date
+			, String VideoTitle, String filePath) 
 			throws IOException {
 		
 		byte[] buffer = new byte[8 * 1024];
-		File myFile = new File(filePath + filename);
+		File myFile = new File("/Users/hamed/Documents/web_soa/projet", filePath+id+"_"+filename);
 		OutputStream output = new FileOutputStream(myFile);
 		int bytesRead=0;
 		while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -130,12 +133,11 @@ public class UploadVideoToDb extends HttpServlet {
 	
 	
 	private Video writeToVideo(String title, String filePath, String fileName
-			, String fileFormat, String description, Date uploadDate) {
+			, String fileFormat, String description) {
 		Video newVideo = new Video();
 		newVideo.setFilePath(filePath);
 		newVideo.setFileName(fileName);
 		newVideo.setDescription(description);
-		newVideo.setUploadDate(uploadDate);
 		return newVideo;
 	}
 

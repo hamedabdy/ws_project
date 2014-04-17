@@ -302,7 +302,7 @@ h6 {
   color: white; }
 
 .demo-headline {
-  padding: 73px 0 110px;
+  padding: 10px 0 30px;
   text-align: center; }
 
 .demo-logo {
@@ -311,10 +311,10 @@ h6 {
   letter-spacing: -2px;
   line-height: 100px; }
   .demo-logo .logo {
-    background: url("../images/logo-ossc-notxt.png") center 0 no-repeat;
+    background: url("../images/logo-ossc-blue-no-text.png") center 0 no-repeat;
     background-size: 256px 186px;
     height: 186px;
-    margin: 0 auto 26px;
+    margin: 0 auto 10px;
     overflow: hidden;
     text-indent: -9999em;
     width: 256px; }
@@ -2368,7 +2368,7 @@ body.vjs-full-window {
   padding: 24px 23px 20px;
   position: relative; }
   .login-form:before {
-    content: "";
+    /* content: ""; */
     border-style: solid;
     border-width: 12px 12px 12px 0;
     border-color: transparent #eceff1 transparent transparent;
