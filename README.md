@@ -1,7 +1,6 @@
-Projet du WEB SOA et JEE - M1 Informatique Paris V Descartes
-============================================================
-
-## * Serveur de Streaming de Vidéo
+Serveur de Streaming de Vidéo
+=============================
+*Projet du WEB SOA et JEE - M1 Informatique Paris V Descartes*
 
 
 # Introduction
@@ -42,7 +41,7 @@ La lacture de vidéo est faite en utilisant API lecture vidéo du HTML5.
 
 ### Coté Serveur
 
-** Toute les requetes d'échanges entre le serveur et la base de données et faite en `HTTP` et `JSON` **
+**Toute les requetes d'échanges entre le serveur et la base de données et faite en `HTTP` et `JSON`**
 
 #### Procedure stockage vidéo dans la base Riak
 Tout d'abord le serveur est developé par la classe `HTTPServlet` du package `javax.servlet-api` qui est chargé dans le fichier `pom.xml` pour que Maven puisse recuperer les fichiers `.jar` de ce package automatiquement.
