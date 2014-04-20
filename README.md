@@ -1,8 +1,7 @@
-ws_project - Serveur de Streaming de Vidéo
-==========================================
+Projet du WEB SOA et JEE - M1 Informatique Paris V Descartes
+============================================================
 
-Projet WEB SOA JEE M1
-Version 2
+## * Serveur de Streaming de Vidéo
 
 
 # Introduction
