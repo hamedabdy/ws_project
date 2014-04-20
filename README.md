@@ -50,7 +50,7 @@ Le serveur est toujours à l'écoute des changements à partir du client. C'est 
 Dans une deuxième étape, les informations et la vidéo recuperer du site sont stocké dans la base Riak via son interface `HTTP` et grâce à son API (`riak-client`) pour JAVA.
 
 #### Recuperation et affichage de la vidéo à partir Riak
-Ensuite selon demande de l'utilisateur pour voir une vidéo, la méthode `doGet()` est proviqué et donc la vidéo ainsi avec ses propres informations complementaire sont envoyé vers le client (par affichage sur une page HTML). L'utilisateur aura donc la possiblité de télécharger cette vidéo ou la voire directement sur le site.
+Ensuite selon demande de l'utilisateur pour voir une vidéo, la méthode `doGet()` est provoqué et donc la vidéo ainsi avec ses propres informations complementaire sont envoyé vers le client (par affichage sur une page HTML). L'utilisateur aura donc la possiblité de télécharger cette vidéo ou la voire directement sur le site.
 
 
 # Conclusion
