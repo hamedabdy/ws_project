@@ -28,7 +28,8 @@ Ce projet ainsi donne la possibilité aux utilisateurs de charger (Upload) leurs
 
 # Fonctionnalités Techniques
 
-Expliquation étape par étape:
+Explication étape par étape:
+
 ### Coté Client
 
 #### Chargement de la vidéo
