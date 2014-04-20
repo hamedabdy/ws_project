@@ -7,7 +7,7 @@ Serveur de Streaming de Vidéo
 
 ## General
 
-Ce projet consiste à animer les technologies apris dans les cours de JEE et WEB SOA en première année de Master Informatique au sein d'université de Paris V Descartes.
+Ce projet consiste à animer les technologies appris dans les cours de JEE et WEB SOA en première année de Master Informatique au sein d'université de Paris V Descartes.
 
 ## Projet
 
@@ -22,8 +22,8 @@ Ce projet est developé avec les technologies suivantes:
 * JSON (communication entre Serveur, base de données et client)
 * HTML5 + CSS3 (coté Client)
 
-Le but de ce projet est de créer un serveur de streaming de vidéo avec les techonologies cité au-dessus similaire au produits existants comme par exemple: Youtube, Vimeo, DailyMotion et etc.
-Ce projet ainsi donne la possibilité aux utilisateurs de charger (Upload) leurs propres vidéo au serveur et d'être capable de la voire en directe sur le site.
+Le but de ce projet est de créer un serveur de streaming de vidéo avec les techonologies cité au-dessus similaire aux produits existants comme par exemple: Youtube, Vimeo, DailyMotion et etc.
+Ce projet ainsi donne la possibilité aux utilisateurs de charger (Upload) leurs propres vidéo au serveur et d'être capable de la voir en directe sur le site.
 
 
 # Fonctionnalités Techniques
@@ -34,11 +34,11 @@ Explication étape par étape:
 
 #### Chargement de la vidéo
 
-Du coté client, la methode POST est utilisé pour envoyer la vidèo au serveur par une formulaire simple du HTML.
+Du coté client, la methode POST est utilisé pour envoyer la vidèo au serveur par un formulaire simple du HTML.
 
 #### Lecture vidéo
 
-La lacture de vidéo est faite en utilisant API lecture vidéo du HTML5.
+La lecture de vidéo est faite en utilisant l'API de la lecture vidéo du HTML5.
 
 ### Coté Serveur
 
@@ -47,11 +47,11 @@ La lacture de vidéo est faite en utilisant API lecture vidéo du HTML5.
 #### Procedure stockage vidéo dans la base Riak
 Tout d'abord le serveur est developé par la classe `HTTPServlet` du package `javax.servlet-api` qui est chargé dans le fichier `pom.xml` pour que Maven puisse recuperer les fichiers `.jar` de ce package automatiquement.
 Ainsi ce dernier utilise l'annotation `@MultiPartConfig` pour être capable recevoir des fichiers.
-Le serveur est toujours à l'écoute des changements à partir du client. C'est à dire, en beneficiant de sa méthode `doPost()`, o peut recuperer la vidès charger par l'utilisateur.
+Le serveur est toujours à l'écoute des changements à partir du client. C'est à dire, en profitant de sa méthode `doPost()`, on peut recuperer les vidèos charger par l'utilisateur.
 Dans une deuxième étape, les informations et la vidéo recuperer du site sont stocké dans la base Riak via son interface `HTTP` et grâce à son API (`riak-client`) pour JAVA.
 
 #### Recuperation et affichage de la vidéo à partir Riak
-Ensuite selon demande de l'utilisateur pour voir une vidéo, la méthode `doGet()` est provoqué et donc la vidéo ainsi avec ses propres informations complementaire sont envoyé vers le client (par affichage sur une page HTML). L'utilisateur aura donc la possiblité de télécharger cette vidéo ou la voire directement sur le site.
+Ensuite selon demande de l'utilisateur pour voir une vidéo, la méthode `doGet()` est provoqué et donc la vidéo ainsi avec ses propres informations complementaire sont envoyé vers le client (par affichage sur une page HTML). L'utilisateur aura donc la possiblité de télécharger cette vidéo ou la voir directement sur le site.
 
 
 # Conclusion
