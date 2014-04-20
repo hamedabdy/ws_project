@@ -7,7 +7,7 @@ Serveur de Streaming de Vidéo
 
 ## General
 
-Ce projet consiste a animer les technologies apris dans les cours de JEE et WEB SOA en première année de Master Informatique au sein d'université de Paris V Descartes.
+Ce projet consiste à animer les technologies apris dans les cours de JEE et WEB SOA en première année de Master Informatique au sein d'université de Paris V Descartes.
 
 ## Projet
 
