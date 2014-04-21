@@ -20,7 +20,7 @@ Ce projet est developé avec les technologies suivantes:
   * Apache Tomcat 7.0 (serveur de lancement)
 * API du site last.fm
 * Base de Données
-  * HSQLDB 1.8 (Base de données SQL)
+  * Hyper SQL Database (HSQLDB) 1.8 (Base de données SQL)
   * Javax Persistence (EntityManager)
 * JSON (communication entre Serveur, base de données et client)
 * HTML (coté Client)
@@ -43,6 +43,25 @@ Après avoir les recuperer sous format de `JSON`, il créé ensuite un objet `Co
 
 #### Recuperation et affichage concert à partir HSQLDB
 Ensuite selon demande de l'utilisateur, la méthode `doGet()` est provoqué et donc la liste des concerts present dans la base est affiché sur une page HTML
+
+
+# Installation
+
+## Prérequis
+
+* Eclipse Kepler JEE IDE
+* Apache Tomcat 7.0
+* Hyper SQL Database (HSQLDB) 1.8
+
+#### 1. Demarer le serveur de base de données
+Il suffit de lancer cette ligne de commande dans un Terminal ou Command Prompt:
+
+`java -cp /chemin/vers/hsqldbX/hsqldb/lib/hsqldb.jar oeg.hsldb.Server`
+
+#### 2. Demarer l'application JAVA
+
+Depuis l'interface Eclipse, demarere le projet comme un serveur.
+
 
 # Conclusion
 
