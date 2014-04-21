@@ -54,6 +54,25 @@ Dans une deuxième étape, les informations et la vidéo recuperer du site sont 
 Ensuite selon demande de l'utilisateur pour voir une vidéo, la méthode `doGet()` est provoqué et donc la vidéo ainsi avec ses propres informations complementaire sont envoyé vers le client (par affichage sur une page HTML). L'utilisateur aura donc la possiblité de télécharger cette vidéo ou la voir directement sur le site.
 
 
+# Installation
+
+## Prérequis
+
+* Eclipse Kepler JEE IDE
+ * Maven
+* Apache Tomcat 7.0
+* Basho Riak 1.4.8
+
+#### 1. Demarer le serveur de base de données
+Il suffit de lancer cette ligne de commande dans un Terminal (Unix ou Linux **uniquement**):
+
+`.//chemin/vers/riakX/bin/riak start`
+
+#### 2. Demarer l'application JAVA
+
+Depuis l'interface Eclipse, demarere le projet comme un serveur Apache Tomcat 7.
+
+
 # Conclusion
 
 Apart le fait que j'ai trouvé cette module très interessante et que j'avais fait un peu de developpement JAVA Servlet en troisieme année de la Licence et puis encore j'ai developé une application client/serveur en utilisant d'autre langages, mais je dois dire que cette module m'a rajouter plus connaissances sur l'architecture et la façon comment chaque module du serveur, de la base de données et du web interagissent entre eux.
