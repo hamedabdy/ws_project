@@ -60,7 +60,7 @@ Il suffit de lancer cette ligne de commande dans un Terminal ou Command Prompt:
 
 #### 2. Demarer l'application JAVA
 
-Depuis l'interface Eclipse, demarere le projet comme un serveur.
+Depuis l'interface Eclipse, demarere le projet comme un serveur Apache Tomcat 7.
 
 
 # Conclusion
