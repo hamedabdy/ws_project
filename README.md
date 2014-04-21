@@ -69,7 +69,7 @@ Apart le fait que j'ai trouvé cette module très interessante et que j'avais fa
 
 # A propos
 
-Ce projet est réalisé developé et testé par:
+Ce projet est réalisé, developé et testé par:
 
 [Hamed Abdy] (https://github.com/hamedabdy)
 
