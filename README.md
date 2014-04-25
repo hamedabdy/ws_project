@@ -56,7 +56,7 @@ Ensuite selon demande de l'utilisateur, la méthode `doGet()` est provoqué et d
 #### 1. Demarer le serveur de base de données
 Il suffit de lancer cette ligne de commande dans un Terminal ou Command Prompt:
 
-`java -cp /chemin/vers/hsqldbX/hsqldb/lib/hsqldb.jar oeg.hsldb.Server`
+`java -cp /chemin/vers/hsqldbX/hsqldb/lib/hsqldb.jar org.hsldb.Server`
 
 #### 2. Demarer l'application JAVA
 
