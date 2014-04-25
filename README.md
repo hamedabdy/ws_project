@@ -65,7 +65,7 @@ Depuis l'interface Eclipse, demarere le projet comme un serveur Apache Tomcat 7.
 
 # Conclusion
 
-Apart le fait que j'ai trouvé cette module très interessante et que j'avais fait un peu de developpement JAVA Servlet en troisieme année de la Licence et puis encore j'ai developé une application client/serveur en utilisant d'autre langages, mais je dois dire que cette module m'a rajouter plus connaissances sur l'architecture et la façon comment chaque module du serveur, de la base de données et du web interagissent entre eux.
+Apart le fait que j'ai trouvé ce module très interessant et que j'avais fait un peu de developpement JAVA Servlet en troisieme année de la Licence et puis encore j'ai developé une application client/serveur en utilisant d'autre langages, mais je dois dire que cette module m'a rajouter plus connaissances sur l'architecture et la façon comment chaque module du serveur, de la base de données et du web interagissent entre eux.
 
 # A propos
 
