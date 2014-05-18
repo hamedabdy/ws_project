@@ -24,37 +24,23 @@ import com.basho.riak.client.RiakFactory;
 import com.basho.riak.client.bucket.Bucket;
 import com.db.Video;
 
-/**
- * Servlet implementation class UploadVideoToDb
- */
+
 @MultipartConfig
 public class UploadVideoToDb extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UploadVideoToDb() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+
+		// Setting PWD to tomcat server root dir
+		System.out.println(System.getProperty("user.dir"));
+
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		
+		out.println(System.getProperty("user.dir"));
+
 		/*
 		 * GET form parameters
 		 */
@@ -68,10 +54,10 @@ public class UploadVideoToDb extends HttpServlet {
 		Video newVideo = new Video();
 		// Write uploaded file to disk
 		String pathToFile = writeToDisk(fileContent, newVideo.getId(), fileName
-				, newVideo.getUploadDate(), "", "/src/main/webapp/uploads/");
+				, newVideo.getUploadDate(), "", "../webapps/projet/uploads/");
 		// Create new video instance with uploaded parameters
 		newVideo = writeToVideo(videoTitle, pathToFile, newVideo.getId()+"_"+fileName, "", "");
-		
+
 		/*
 		 *  Riak section
 		 */
@@ -98,7 +84,7 @@ public class UploadVideoToDb extends HttpServlet {
 		}
 
 		out.println("<p>Video sent to server :)</p>");
-		out.println("<a href='index.html'>Go Back</a>");
+		out.println("<a href='/projet'>Go Back</a> <a href='/projet/getVideo'>Get a list of videos</a>");
 
 	}
 
@@ -111,15 +97,13 @@ public class UploadVideoToDb extends HttpServlet {
 		}
 		return null;
 	}
-	
-	
 
 	private String writeToDisk(InputStream inputStream, int id, String filename, Date date
 			, String VideoTitle, String filePath) 
-			throws IOException {
-		
+					throws IOException {
+
 		byte[] buffer = new byte[8 * 1024];
-		File myFile = new File("/Users/hamed/Documents/web_soa/projet", filePath+id+"_"+filename);
+		File myFile = new File(filePath+id+"_"+filename);
 		OutputStream output = new FileOutputStream(myFile);
 		int bytesRead=0;
 		while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -129,9 +113,9 @@ public class UploadVideoToDb extends HttpServlet {
 		inputStream.close();
 		return myFile.getPath();
 	}
-	
-	
-	
+
+
+
 	private Video writeToVideo(String title, String filePath, String fileName
 			, String fileFormat, String description) {
 		Video newVideo = new Video();

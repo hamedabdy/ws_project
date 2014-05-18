@@ -1,49 +1,9 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+"http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
-
-	<servlet>
-		<servlet-name>HttpGetServlet</servlet-name>
-		<servlet-class>com.servlet.HttpGetServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>HttpGetServlet</servlet-name>
-		<url-pattern>/get</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>ShowConcertsServlet</servlet-name>
-		<servlet-class>com.servlet.ShowConcertsServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ShowConcertsServlet</servlet-name>
-		<url-pattern>/show</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>EmptyDBServlet</servlet-name>
-		<servlet-class>com.servlet.EmptyDBServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>EmptyDBServlet</servlet-name>
-		<url-pattern>/del</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>RiakServlet</servlet-name>
-		<display-name>RiakServlet</display-name>
-		<description></description>
-		<servlet-class>com.servlet.RiakServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>RiakServlet</servlet-name>
-		<url-pattern>/riak</url-pattern>
-	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>GetVideoFromDb</servlet-name>
@@ -52,21 +12,31 @@
 		<servlet-class>com.servlet.GetVideoFromDb</servlet-class>
 	</servlet>
 	
-	<servlet-mapping>
-		<servlet-name>GetVideoFromDb</servlet-name>
-		<url-pattern>/getVideo</url-pattern>
-	</servlet-mapping>
-	
 	<servlet>
 		<servlet-name>UploadVideoToDb</servlet-name>
 		<display-name>UploadVideoToDb</display-name>
 		<description></description>
 		<servlet-class>com.servlet.UploadVideoToDb</servlet-class>
 	</servlet>
-	
+	<servlet>
+		<servlet-name>EmptyRiak</servlet-name>
+		<display-name>EmptyRiak</display-name>
+		<description></description>
+		<servlet-class>com.servlet.EmptyRiak</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetVideoFromDb</servlet-name>
+		<url-pattern>/getVideo</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>UploadVideoToDb</servlet-name>
 		<url-pattern>/uploadVideo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EmptyRiak</servlet-name>
+		<url-pattern>/emptyRiak</url-pattern>
 	</servlet-mapping>
 
 </web-app>
