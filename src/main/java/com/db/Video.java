@@ -8,8 +8,8 @@ public class Video {
 	private int id;
 	private String filePath;
 	private String fileName;
-	private String fileFormat;
-	private String description;
+	private String fileExt;
+	private String title;
 	private Date uploadDate;
 	
 	public Video() {
@@ -58,23 +58,23 @@ public class Video {
 	}
 
 	
-	public String getFileFormat() {
-		return fileFormat;
+	public String getFileExt() {
+		return fileExt;
 	}
 
 
-	public void setFileFormat(String fileFormat) {
-		this.fileFormat = fileFormat;
+	public void setFileExt(String fileExt) {
+		this.fileExt = fileExt;
 	}
 
 
-	public String getDescription() {
-		return description;
+	public String getTitle() {
+		return title;
 	}
 
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 

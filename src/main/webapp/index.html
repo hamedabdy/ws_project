@@ -21,12 +21,8 @@
 	<div class="container">
 		<div class="demo-headline">
 			<h3 class="demo-logo">
-				<table style="margin-left: 180px;">
-					<tr>
-						<td><div class="logo"></div></td>
-						<td>OSSC <small>Cloud Video Streaming Services</small>
-						</td>
-				</table>
+				<div class="logo"></div>
+				OSSC <small>Cloud Video Streaming Services</small>
 			</h3>
 		</div>
 		<!-- /demo-headline -->
@@ -44,11 +40,11 @@
 
 							<div class="nav-collapse collapse">
 								<ul class="nav">
-									<li><a href="/projet"> Home 
-									<span class="navbar-unread">1</span>
+									<li><a href="/projet"> Home <span
+											class="navbar-unread">1</span>
 									</a></li>
-									<li class="active"><a href="getVideo"> Browse Videos 
-									<span class="navbar-unread">2</span>
+									<li class="active"><a href="getVideo"> Browse Videos <span
+											class="navbar-unread">2</span>
 									</a>
 										<ul>
 											<li><a href="#">Newest</a></li>
@@ -60,10 +56,9 @@
 												</ul> <!-- /Sub menu --></li>
 											<li><a href="#">Highest Rated</a></li>
 										</ul> <!-- /Sub menu --></li>
-										<li class="active">
-										<a href="#"> Notifications 
-										<span class="navbar-unread">1</span>
-										</a></li>
+									<li class="active"><a href="#"> Notifications <span
+											class="navbar-unread">1</span>
+									</a></li>
 									<li><a href="#"> About Us <span class="navbar-unread">1</span>
 									</a></li>
 								</ul>
@@ -106,14 +101,15 @@
 						<input class="todo-search-field" type="search"
 							placeholder="Search" />
 					</div>
-					<ul style="height:327px; overflow-y:scroll; border-radius: 8px 8px 6px 6px;">
+					<ul id="video-list"
+						style="height: 327px; overflow-y: scroll; border-radius: 8px 8px 6px 6px;">
+						<!-- 
 						<li class="todo-done">
 							<div class="todo-content">
 								<h4 class="todo-name">Big Buck Bunny</h4>
 								Description: Big Buck Bunny... - Watching...
 							</div>
 						</li>
-
 						<li>
 							<div class="todo-content">
 								<h4 class="todo-name">
@@ -122,30 +118,7 @@
 								Description: ...
 							</div>
 						</li>
-
-						<li>
-							<div class="todo-content">
-								<h4 class="todo-name">
-									<a href="#">Iron Man</a>
-								</h4>
-								Description: ...
-							</div>
-						</li>
-
-						<li>
-							<div class="todo-content">
-								<h4 class="todo-name">
-									<a href="#">Spiderman</a>
-								</h4>
-								Description: ...
-							</div>
-						</li>
-						<li class="todo-done">
-							<div class="todo-content">
-								<h4 class="todo-name">Big Buck Bunny</h4>
-								Description: Big Buck Bunny... - Watching...
-							</div>
-						</li>
+						 -->
 					</ul>
 				</div>
 			</div>
@@ -153,14 +126,15 @@
 
 			<div class="span8 demo-video">
 				<!--[if !IE]> -->
-				<video class="video-js" controls preload="auto" width="620"
-					height="349" poster="images/video/poster.jpg" data-setup="{}">
-					<source
+				<video id="vplayer" class="video-js" controls preload="auto"
+					width="620" height="349" data-setup="{}">
+					<!-- <source
 						src="http://iurevych.github.com/Flat-UI-videos/big_buck_bunny.mp4"
 						type="video/mp4">
 					<source
 						src="http://iurevych.github.com/Flat-UI-videos/big_buck_bunny.webm"
 						type="video/webm">
+						 -->
 				</video>
 				<!-- <![endif]-->
 
@@ -258,5 +232,58 @@
       <script src="js/icon-font-ie7.js"></script>
       <script src="js/icon-font-ie7-24.js"></script>
     <![endif]-->
+
+	<script type="text/javascript">
+		$
+				.ajax({
+					type : 'GET',
+					url : '/projet/getJson',
+					contentType : 'application/json; charset=UTF-8',
+					error : function(jqxhr, status, err) {
+						console.log(JSON.stringify(err) + " "
+								+ JSON.stringify(status));
+					},
+					success : function(data, status) {
+						if (data && typeof data === "string" && data !== null) {
+							_responseJSON = JSON.parse(data);
+						} else {
+							updateVideoList(data);
+						}
+					}
+				});
+		
+		function setVideoSrc(element) {
+			fileName = $(element).parents("div").attr("name");
+			$('#vplayer > video').prop('src','uploads/'+fileName);
+		}
+		
+		function updateVideoList(data) {
+			for(i=0; i<data.length; i++){
+				// updating video list 
+				a = document.createElement("a");
+				a.appendChild(document.createTextNode(data[i].title));
+				h4 = document.createElement("h4");
+				h4.setAttribute("class", "todo-name");
+				h4.setAttribute("onclick", "setVideoSrc(this); return false;");
+				h4.appendChild(a);
+				div = document.createElement("div");
+				div.setAttribute("class", "todo-content");
+				div.setAttribute("name", data[i].fileName);
+				div.appendChild(h4);
+				divBr = document.createElement("br");
+				divA = document.createElement("a");
+				divA.appendChild(document.createTextNode("Download"));
+				divA.href = "uploads/"+data[i].fileName;
+				div.appendChild(document.createTextNode(data[i].fileName));
+				div.appendChild(divBr);
+				div.appendChild(divA);
+				li = document.createElement("li");
+				li.appendChild(div);
+				document.getElementById("video-list").appendChild(li);
+				}
+		}
+		
+	</script>
+
 </body>
 </html>

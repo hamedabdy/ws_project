@@ -33,37 +33,31 @@ public class UploadVideoToDb extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// Setting PWD to tomcat server root dir
-		System.out.println(System.getProperty("user.dir"));
-
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		
-		out.println(System.getProperty("user.dir"));
-
 		/*
 		 * GET form parameters
 		 */
 		String videoTitle = request.getParameter("video-title");
-		//System.out.println("videoTitle:  " + videoTitle);
 		Part filePart = request.getPart("video");
 		String fileName = getFilename(filePart);
-		//System.out.println("file name  : "  + fileName);
+		String fileExt = getExtension(fileName);
 		InputStream fileContent = filePart.getInputStream();
 		// Creating a new Video instance to get a new VideoId
 		Video newVideo = new Video();
 		// Write uploaded file to disk
 		String pathToFile = writeToDisk(fileContent, newVideo.getId(), fileName
-				, newVideo.getUploadDate(), "", "../webapps/projet/uploads/");
+				, newVideo.getUploadDate(), "", "webapps/projet/uploads/");
 		// Create new video instance with uploaded parameters
-		newVideo = writeToVideo(videoTitle, pathToFile, newVideo.getId()+"_"+fileName, "", "");
+		newVideo = writeToVideo(videoTitle, pathToFile, newVideo.getId()+"_"+fileName, fileExt);
 
 		/*
 		 *  Riak section
 		 */
 		IRiakClient riakClient;
 		IRiakObject myObject;
-		String value, key;
+		String value;
 
 		try {
 			// Store a video into Riak -->
@@ -71,10 +65,8 @@ public class UploadVideoToDb extends HttpServlet {
 			Bucket videoBucket = riakClient.fetchBucket("Videos").execute();
 			videoBucket.store(String.valueOf(newVideo.getId()),newVideo).execute();
 			myObject = videoBucket.fetch(String.valueOf(newVideo.getId())).execute();
-			key = (new JSONObject(myObject).getString("key")).toString();
 			value = (new JSONObject(myObject).getString("valueAsString")).toString();
-			//System.out.println("myobject : { key: " + key + "\n value: " + value + " }");
-			out.println("myobject : { key: " + key + ", value: " + value + " }" + "<br><br>");
+			out.println(" value: " + value + "<br><br>");
 			// <--
 
 			// Close Riak connection
@@ -97,6 +89,18 @@ public class UploadVideoToDb extends HttpServlet {
 		}
 		return null;
 	}
+	
+	private static String getExtension(String fileName) {
+		String extension = "";
+
+		int i = fileName.lastIndexOf('.');
+		int p = Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
+
+		if (i > p) {
+		    extension = fileName.substring(i+1);
+		}
+		return extension;
+	}
 
 	private String writeToDisk(InputStream inputStream, int id, String filename, Date date
 			, String VideoTitle, String filePath) 
@@ -114,14 +118,13 @@ public class UploadVideoToDb extends HttpServlet {
 		return myFile.getPath();
 	}
 
-
-
 	private Video writeToVideo(String title, String filePath, String fileName
-			, String fileFormat, String description) {
+			, String fileExt) {
 		Video newVideo = new Video();
 		newVideo.setFilePath(filePath);
 		newVideo.setFileName(fileName);
-		newVideo.setDescription(description);
+		newVideo.setTitle(title);
+		newVideo.setFileExt(fileExt);
 		return newVideo;
 	}
 

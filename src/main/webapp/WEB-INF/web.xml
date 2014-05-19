@@ -24,6 +24,12 @@
 		<description></description>
 		<servlet-class>com.servlet.EmptyRiak</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>GetJson</servlet-name>
+		<display-name>GetJson</display-name>
+		<description></description>
+		<servlet-class>com.servlet.GetJson</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>GetVideoFromDb</servlet-name>
@@ -37,6 +43,10 @@
 	<servlet-mapping>
 		<servlet-name>EmptyRiak</servlet-name>
 		<url-pattern>/emptyRiak</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetJson</servlet-name>
+		<url-pattern>/getJson</url-pattern>
 	</servlet-mapping>
 
 </web-app>
